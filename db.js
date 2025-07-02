@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const mongoURI = "mongodb://localhost:27017/quickride"; // Change "quickride" to your database name
+const mongoURI = process.env.MONGODB_URI
 
 const connectDB = async () => {
   try {
