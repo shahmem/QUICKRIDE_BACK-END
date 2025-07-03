@@ -23,7 +23,7 @@ const app = express();
 // Middleware
 app.use(cors({
   origin: "https://quick-ride-dun.vercel.app", // Your frontend domain
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
   credentials: true // If you're using cookies, auth headers, etc.
 })); 
 app.use(express.json({ limit: '50mb' }));
