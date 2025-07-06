@@ -1,10 +1,10 @@
 const express = require("express");
 const path = require('path');
+require("dotenv").config();
 const connectDB = require('./db'); // Import MongoDB connection
 connectDB();
 
 const cors = require("cors");
-require("dotenv").config();
 
 const signupRoutes = require("./routes/signup");
 const loginRoutes = require("./routes/login");
@@ -13,6 +13,7 @@ const driverprofileRoutes = require("./routes/driverprofile");
 const riderprofileRoutes = require("./routes/riderprofile");
 const bookings = require("./routes/bookform");
 const adminAuthRoutes = require("./routes/admin");
+const payment = require("./routes/payment");
 
 const app = express();
 // app.use((req, res, next) => {
@@ -20,12 +21,13 @@ const app = express();
 //   next();
 // });
 
-// Middleware
-app.use(cors({
+app.use(cors(
+    {
   origin: "https://quick-ride-dun.vercel.app", // Your frontend domain
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
   credentials: true // If you're using cookies, auth headers, etc.
-})); 
+  }
+)); 
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
@@ -40,6 +42,7 @@ app.use("/api/forgot-password", authRoutes);
 app.use("/api/driverprofile", driverprofileRoutes);
 app.use("/api/riderprofile", riderprofileRoutes);
 app.use("/api/bookings", bookings);
+app.use("/api/payment", payment);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
